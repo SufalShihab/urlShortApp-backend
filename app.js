@@ -14,13 +14,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/mernUrlShortApp')
+// mongoose.connect('mongodb://127.0.0.1:27017/mernUrlShortApp')
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB Connected Successfully!"))
 .catch((err) => console.error("MongoDB Connection Error:", err));
 
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin:[
+        'http://localhost:5173',
+        'https://url-short-app-frontend.vercel.app'
+    ],
     credentials: true
 }));
 
