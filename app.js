@@ -20,10 +20,10 @@ mongoose.connect(process.env.MONGO_URI)
 .catch((err) => console.error("MongoDB Connection Error:", err));
 
 
-app.use(cors({
-    origin:true,
-    credentials: true
-}));
+// app.use(cors({
+//     origin:true,
+//     credentials: true
+// }));
 
 // app.use(cors({
 //     origin:[
@@ -32,6 +32,15 @@ app.use(cors({
 //     ],
 //     credentials: true
 // }));
+app.use(cors({
+  origin: [
+    'http://localhost:5173', 
+    'https://url-short-app-frontend.vercel.app'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(express.json());
 app.use(cookieParser());
