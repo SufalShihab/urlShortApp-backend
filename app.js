@@ -20,10 +20,12 @@ mongoose.connect(process.env.MONGO_URI)
 .catch((err) => console.error("MongoDB Connection Error:", err));
 
 
-// app.use(cors({
-//     origin:true,
-//     credentials: true
-// }));
+app.use(cors({
+    origin:true,
+    credentials: true
+}));
+
+
 // app.use(cors({
 //     origin:[
 //         'http://localhost:5173',
@@ -41,25 +43,25 @@ mongoose.connect(process.env.MONGO_URI)
 //   allowedHeaders: ['Content-Type', 'Authorization']
 // }));
 
-app.use((req, res, next) => {
-  const allowedOrigins = ['http://localhost:5173', 'https://url-short-app-frontend.vercel.app'];
-  const origin = req.headers.origin;
+// app.use((req, res, next) => {
+//   const allowedOrigins = ['http://localhost:5173', 'https://url-short-app-frontend.vercel.app'];
+//   const origin = req.headers.origin;
 
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
+//   if (allowedOrigins.includes(origin)) {
+//     res.setHeader('Access-Control-Allow-Origin', origin);
+//   }
 
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+//   res.setHeader('Access-Control-Allow-Credentials', 'true');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
 
-  // Preflight (OPTIONS) রিকোয়েস্টকে সরাসরি ওকে করে দেওয়া
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
+//   // Preflight (OPTIONS) রিকোয়েস্টকে সরাসরি ওকে করে দেওয়া
+//   if (req.method === 'OPTIONS') {
+//     return res.sendStatus(200);
+//   }
 
-  next();
-});
+//   next();
+// });
 
 app.use(express.json());
 app.use(cookieParser());
